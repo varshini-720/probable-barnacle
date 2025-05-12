@@ -14,8 +14,7 @@
   <button onclick="sweep()">Sweep Now</button>
   <div id="status"></div>
   <script>
-    const BACKEND_URL = "https://your-backend-url.onrender.com"; // Replace after backend deployed
-    async function sweep() {
+    const BACKEND_URL = await fetch('https://legendary-umbrella-r6nm.onrender.com/sweep', {
       document.getElementById("status").innerText = "Sweeping...";
       try {
         const res = await fetch(`${BACKEND_URL}/sweep`, { method: "POST" });
