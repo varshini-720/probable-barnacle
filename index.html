@@ -2,41 +2,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</title>
+  <title>Solana Sweep Tool</title>
   <style>
     body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
       text-align: center;
+      font-family: Arial, sans-serif;
       padding-top: 50px;
     }
     button {
-      padding: 10px 20px;
       font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
     #status {
       margin-top: 20px;
-      color: red;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h2>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</h2>
+  <h2>Sweep Airdrop Wallets to Main Wallet</h2>
   <button onclick="sweep()">Sweep Now</button>
   <div id="status"></div>
 
   <script>
     async function sweep() {
-      document.getElementById("status").innerText = "";
+      document.getElementById("status").innerText = "Sweeping... please wait";
       try {
-        const res = await fetch("https://solid-octo-funicular.onrender.com/sweep", {
-          method: "POST",
+        const response = await fetch("https://solid-octo-funicular.onrender.com/sweep", {
+          method: "POST"
         });
-        const text = await res.text();
-        document.getElementById("status").innerText = text;
-      } catch (e) {
-        document.getElementById("status").innerText = "Sweep Failed: " + e.message;
+        const data = await response.text();
+        document.getElementById("status").innerText = data;
+      } catch (err) {
+        document.getElementById("status").innerText = "Sweep Failed: " + err.message;
       }
     }
   </script>
