@@ -2,27 +2,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sweep All SOL to Main Wallet (Backend Gas)</title>
+  <title>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #000; color: #fff; text-align: center; padding-top: 60px; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 20px; }
+    #status { margin-top: 30px; font-size: 18px; color: #f88; }
+  </style>
 </head>
-<body style="background-color:black; color:white; font-family:sans-serif;">
-    <h1>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</h1>
-    <button onclick="sweep()">Sweep Now</button>
-    <p id="status"></p>
+<body>
+  <h2>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</h2>
+  <button onclick="sweep()">Sweep Now</button>
+  <div id="status"></div>
 
-    <script>
-        async function sweep() {
-            document.getElementById('status').innerText = "Sweeping...";
-            try {
-                const res = await fetch('https://amole-nine.vercel.app/sweep', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                const data = await res.text();
-                document.getElementById('status').innerText = "Sweep Response: " + data;
-            } catch (e) {
-                document.getElementById('status').innerText = "Error: " + e.message;
-            }
-        }
-    </script>
+  <script>
+    async function sweep() {
+      document.getElementById('status').innerText = 'Sweeping...';
+      try {
+        const res = await fetch('https://amole-nine.vercel.app/sweep', { method: 'POST' });
+        const data = await res.text();
+        document.getElementById('status').innerText = 'Response: ' + data;
+      } catch (e) {
+        document.getElementById('status').innerText = 'Sweep Failed: ' + e.message;
+      }
+    }
+  </script>
 </body>
 </html>
