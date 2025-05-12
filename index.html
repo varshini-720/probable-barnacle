@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sweep All SOL to Main Wallet (Backend Gas)</title>
+</head>
+<body style="background-color:black; color:white; font-family:sans-serif;">
+    <h1>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</h1>
+    <button onclick="sweep()">Sweep Now</button>
+    <p id="status"></p>
+
+    <script>
+        async function sweep() {
+            document.getElementById('status').innerText = "Sweeping...";
+            try {
+                const res = await fetch('https://amole-nine.vercel.app/sweep', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.text();
+                document.getElementById('status').innerText = "Sweep Response: " + data;
+            } catch (e) {
+                document.getElementById('status').innerText = "Error: " + e.message;
+            }
+        }
+    </script>
+</body>
+</html>
