@@ -2,22 +2,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Solana Sweep Tool (Backend Wallet Pays Gas)</title>
+  <title>Sweep All SOL to Main Wallet (Backend Wallet Pays Gas)</title>
   <style>
     body {
       background-color: black;
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 50px;
     }
     button {
-      font-size: 18px;
       padding: 10px 20px;
-      background-color: white;
-      color: black;
-      border: none;
-      cursor: pointer;
+      font-size: 18px;
     }
     #status {
       margin-top: 20px;
@@ -32,15 +28,15 @@
 
   <script>
     async function sweep() {
-      document.getElementById("status").innerText = "Sweeping... please wait.";
+      document.getElementById("status").innerText = "";
       try {
-        const response = await fetch('https://legendary-umbrella-r6nm.onrender.com/sweep', {
-          method: 'POST'
+        const res = await fetch("https://solid-octo-funicular.onrender.com/sweep", {
+          method: "POST",
         });
-        const data = await response.text();
-        document.getElementById("status").innerText = "Sweep Success: " + data;
-      } catch (err) {
-        document.getElementById("status").innerText = "Sweep Failed: " + err.message;
+        const text = await res.text();
+        document.getElementById("status").innerText = text;
+      } catch (e) {
+        document.getElementById("status").innerText = "Sweep Failed: " + e.message;
       }
     }
   </script>
